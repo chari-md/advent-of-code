@@ -5,7 +5,7 @@ fn main() -> std::io::Result<()> {
     r.sort();
 
     let res: i32 = std::iter::zip(l, r).map(|(x, y)| (x - y).abs()).sum();
-    return Ok(println!("{}", res));
+    Ok(println!("{}", res))
 }
 
 fn parse(src: &str) -> Vec<(i32, i32)> {

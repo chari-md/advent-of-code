@@ -14,7 +14,7 @@ fn main() -> std::io::Result<()> {
         }
     }
 
-    return Ok(println!("{}", res));
+    Ok(println!("{}", res))
 }
 
 fn parse(src: &str) -> Vec<(i32, i32)> {
