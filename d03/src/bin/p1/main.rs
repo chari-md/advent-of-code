@@ -2,8 +2,8 @@ use std::fs::File;
 use std::io::{self, BufRead};
 
 fn main() -> io::Result<()> {
-    let src = File::open("input.txt")?;
-    let reader = io::BufReader::new(src);
+    let input = File::open("input.txt")?;
+    let reader = io::BufReader::new(input);
 
     let mut ops = vec![];
     for line in reader.lines() {

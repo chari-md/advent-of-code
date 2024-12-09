@@ -1,5 +1,19 @@
 fn main() -> std::io::Result<()> {
-    let (l, r): (Vec<i32>, Vec<i32>) = parse("input.txt").iter().cloned().unzip();
+    let input = std::fs::read_to_string("input.txt").unwrap();
+    Ok(println!("{}", solve(&input)))
+}
+
+fn solve(input: &str) -> i32 {
+    let (l, r): (Vec<i32>, Vec<i32>) = input
+        .lines()
+        .map(|x| {
+            let elms = x
+                .split_whitespace()
+                .map(|x| x.parse::<i32>().unwrap())
+                .collect::<Vec<i32>>();
+            (elms[0], elms[1])
+        })
+        .collect();
 
     let mut h = std::collections::HashMap::new();
     let mut res: i32 = 0;
@@ -14,19 +28,22 @@ fn main() -> std::io::Result<()> {
         }
     }
 
-    Ok(println!("{}", res))
+    res
 }
 
-fn parse(src: &str) -> Vec<(i32, i32)> {
-    std::fs::read_to_string(src)
-        .unwrap()
-        .lines()
-        .map(|x| {
-            let elms = x
-                .split_whitespace()
-                .map(|x| x.parse::<i32>().unwrap())
-                .collect::<Vec<i32>>();
-            (elms[0], elms[1])
-        })
-        .collect()
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() -> std::io::Result<()> {
+        let input = "3   4
+4   3
+2   5
+1   3
+3   9
+3   3";
+        assert_eq!(solve(input), 31);
+        Ok(())
+    }
 }
